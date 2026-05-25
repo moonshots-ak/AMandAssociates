@@ -1,0 +1,9 @@
+# Cloudflare Pages — HTTP Headers
+# Applied automatically to every page on this site.
+# Do not edit unless you know what you are doing.
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

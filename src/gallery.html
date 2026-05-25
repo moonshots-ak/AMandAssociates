@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AMA Gallery — Photos from our office, team events and client meetings." />
+  <title>Gallery — AMA | Akshay Maheshwari &amp; Associates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-ama navbar-expand-lg" aria-label="Main Navigation">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <div class="logo-text">
+          <span class="logo-ama">AMA</span>
+          <span class="logo-sub">Chartered Accountants &amp; Advisory</span>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="hamburger-icon"><span></span><span></span><span></span></div>
+      </button>
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="international.html">International</a></li>
+          <li class="nav-item"><a class="nav-link" href="sectors.html">Sectors</a></li>
+          <li class="nav-item"><a class="nav-link" href="team.html">Our Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item nav-cta"><a class="nav-link" href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Gallery</li>
+        </ol>
+      </nav>
+      <h1>Gallery</h1>
+      <p style="color:rgba(255,255,255,0.6); font-size:1rem; max-width:500px; margin-top:0.75rem;">
+        A glimpse into life at AMA — our workspace, team and events.
+      </p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section-pad">
+    <div class="container">
+
+      <!-- Client instructions info box -->
+      <div class="gallery-info-box mb-4 fade-up">
+        <i class="fas fa-circle-info"></i>
+        <div>
+          <strong>How to add a photo:</strong>
+          Drop your image into <code>src/assets/gallery/</code>, add one line to
+          <code>src/js/gallery-data.js</code>, then commit to GitHub — the site updates automatically.
+          <a href="https://github.com" target="_blank" rel="noopener" style="color:var(--gold); font-weight:600; margin-left:0.25rem;">Open GitHub &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="gallery-filter fade-up" role="group" aria-label="Filter gallery by category">
+        <button class="filter-btn active" data-filter="all">All Photos</button>
+        <button class="filter-btn" data-filter="office">Office</button>
+        <button class="filter-btn" data-filter="team">Team</button>
+        <button class="filter-btn" data-filter="events">Events</button>
+      </div>
+
+      <!-- Gallery grid — populated by gallery.js -->
+      <div class="gallery-grid" id="galleryGrid" aria-label="Photo gallery">
+        <p class="text-muted py-4">Loading gallery…</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button id="lbClose" class="lb-close" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+    <button id="lbPrev" class="lb-nav" aria-label="Previous photo">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="lb-img-wrap">
+      <img id="lbImg" src="" alt="" />
+      <div id="lbCaption" class="lb-caption"></div>
+    </div>
+    <button id="lbNext" class="lb-nav" aria-label="Next photo">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <div id="lbCounter" class="lb-counter"></div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container text-center position-relative" style="z-index:1;">
+      <span class="section-label fade-up">Get Involved</span>
+      <h2 class="section-title fade-up" data-delay="100" style="color:#fff;">
+        Come Visit Us in Indore
+      </h2>
+      <p class="fade-up" data-delay="200" style="color:rgba(255,255,255,0.55); max-width:460px; margin:0 auto 2rem;">
+        Our office is located at Gumasta Nagar, Indore. Walk in or schedule an appointment and
+        meet the team in person.
+      </p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap fade-up" data-delay="300">
+        <a href="contact.html" class="btn-ama btn-ama-gold">Get Directions</a>
+        <a href="team.html" class="btn-ama btn-ama-outline-white">Meet the Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand logo-text"><span class="logo-ama">AMA</span><span class="logo-sub">Chartered Accountants &amp; Advisory</span></div>
+          <p class="footer-tagline mt-2">"Where Global Standards meet Professional Precision"</p>
+          <ul class="footer-contact-list mt-3">
+            <li><i class="fas fa-location-dot"></i> G(1), Scheme No. 71, Sector A, Gumasta Nagar, Indore (MP) 452009</li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919669429551">+91 96694 29551</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:akshaymaheshwariandassociates@gmail.com">akshaymaheshwariandassociates@gmail.com</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-3 col-6">
+          <h5>Services</h5>
+          <ul class="footer-nav-links">
+            <li><a href="services.html#audit">Audit &amp; Assurance</a></li>
+            <li><a href="services.html#taxation">Taxation</a></li>
+            <li><a href="services.html#accounting">Accounting</a></li>
+            <li><a href="services.html#international">International Tax</a></li>
+            <li><a href="services.html#vcfo">Virtual CFO</a></li>
+            <li><a href="services.html#advisory">Business Advisory</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-3 col-6">
+          <h5>Company</h5>
+          <ul class="footer-nav-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="team.html">Our Team</a></li>
+            <li><a href="sectors.html">Sectors</a></li>
+            <li><a href="international.html">International</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h5>Get in Touch</h5>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.45); line-height:1.7;">Available for Zoom, Teams &amp; phone consultations.<br>International queries within 12 business hours.</p>
+          <a href="contact.html" class="btn-ama btn-ama-gold mt-2" style="font-size:0.75rem; padding:0.6rem 1.5rem;"><i class="fas fa-paper-plane me-2"></i> Send a Message</a>
+          <p class="mt-3" style="font-size:0.72rem; color:rgba(255,255,255,0.25);">GSTIN: 23AQKPM9503A1Z6</p>
+        </div>
+      </div>
+      <hr class="footer-divider" />
+      <div class="footer-bottom">
+        <p>&copy; 2026 Akshay Maheshwari and Associates. All rights reserved.</p>
+        <p>Indore, Madhya Pradesh, India</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <!-- Gallery data must load before gallery.js -->
+  <script src="js/gallery-data.js"></script>
+  <script src="js/gallery.js"></script>
+</body>
+</html>

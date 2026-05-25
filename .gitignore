@@ -1,0 +1,10 @@
+# GitHub / Copilot internals
+.github/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
