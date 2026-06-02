@@ -552,7 +552,7 @@ p { color: var(--text-muted); }
   font-family: var(--font-heading);
   font-size: 3.5rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
   position: relative; z-index: 1;
   letter-spacing: 3px;
 }
@@ -646,7 +646,7 @@ p { color: var(--text-muted); }
   display: block;
 }
 .geo-card h5 { color: #fff; font-size: 0.9rem; margin-bottom: 0.2rem; }
-.geo-card p { color: rgba(255,255,255,0.45); font-size: 0.75rem; margin: 0; }
+.geo-card p { color: rgba(255,255,255,0.6); font-size: 0.75rem; margin: 0; }
 
 .intl-svc-card {
   background: var(--white);
@@ -909,7 +909,7 @@ p { color: var(--text-muted); }
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.55);
   margin-bottom: 0.2rem;
   display: block;
   font-family: var(--font-body);
@@ -997,13 +997,13 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .footer-brand .logo-sub { color: rgba(201,168,76,0.75); }
 .footer-tagline {
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.55);
   font-style: italic;
   margin-top: 0.6rem;
   max-width: 260px;
   line-height: 1.6;
 }
-.footer h5 {
+.site-footer h5 {
   font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 700;
@@ -1045,8 +1045,8 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-.footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin: 0; }
-.footer-bottom .gstin { font-family: monospace; font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+.footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin: 0; }
+.footer-bottom .gstin { font-family: monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5); }
 
 
 /* ===============================================================
