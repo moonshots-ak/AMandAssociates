@@ -61,19 +61,8 @@
   <section class="section-pad">
     <div class="container">
 
-      <!-- Client instructions info box -->
-      <div class="gallery-info-box mb-4 fade-up">
-        <i class="fas fa-circle-info"></i>
-        <div>
-          <strong>How to add a photo:</strong>
-          Drop your image into <code>src/assets/gallery/</code>, add one line to
-          <code>src/js/gallery-data.js</code>, then commit to GitHub — the site updates automatically.
-          <a href="https://github.com" target="_blank" rel="noopener" style="color:var(--gold); font-weight:600; margin-left:0.25rem;">Open GitHub &rarr;</a>
-        </div>
-      </div>
-
       <!-- Filter tabs -->
-      <div class="gallery-filter fade-up" role="group" aria-label="Filter gallery by category">
+      <div class="gallery-filter fade-up" id="galleryFilters" role="group" aria-label="Filter gallery by category">
         <button class="filter-btn active" data-filter="all">All Photos</button>
         <button class="filter-btn" data-filter="office">Office</button>
         <button class="filter-btn" data-filter="team">Team</button>
@@ -81,9 +70,7 @@
       </div>
 
       <!-- Gallery grid — populated by gallery.js -->
-      <div class="gallery-grid" id="galleryGrid" aria-label="Photo gallery">
-        <p class="text-muted py-4">Loading gallery…</p>
-      </div>
+      <div class="gallery-grid" id="galleryGrid" aria-label="Photo gallery"></div>
 
     </div>
   </section>

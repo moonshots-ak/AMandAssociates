@@ -8,68 +8,99 @@
 
   var currentIndex = 0;
   var activeImages = [];
+  var renderToken = 0;
 
   /* ---------------------------------------------------------
      Build gallery grid from galleryImages (gallery-data.js)
   --------------------------------------------------------- */
   function renderGallery(filter) {
     var grid = document.getElementById('galleryGrid');
+    var filtersWrap = document.getElementById('galleryFilters');
     if (!grid || typeof galleryImages === 'undefined') return;
 
     filter = filter || 'all';
-    activeImages = filter === 'all'
+    var selectedImages = filter === 'all'
       ? galleryImages
       : galleryImages.filter(function (img) { return img.category === filter; });
+    var token = ++renderToken;
 
-    if (activeImages.length === 0) {
-      grid.innerHTML = '<p class="text-muted text-center py-5">No photos in this category yet.</p>';
+    if (!Array.isArray(selectedImages) || selectedImages.length === 0) {
+      activeImages = [];
+      grid.innerHTML = '';
+      if (filtersWrap) filtersWrap.style.display = 'none';
       return;
     }
 
-    grid.innerHTML = activeImages.map(function (item, idx) {
-      return (
-        '<div class="gallery-item fade-up" data-idx="' + idx + '" role="button" ' +
-             'aria-label="View ' + escHtml(item.caption || 'photo') + '" tabindex="0">' +
-          '<img src="assets/gallery/' + escHtml(item.file) + '" ' +
-               'alt="' + escHtml(item.caption || 'Gallery photo') + '" loading="lazy" ' +
-               'onerror="this.style.display=\'none\';' +
-                         'this.nextElementSibling.style.display=\'flex\'">' +
-          '<div class="gallery-ph" style="display:none">' +
-            '<i class="fas fa-image"></i>' +
-            '<span>' + escHtml(item.caption || 'Photo coming soon') + '</span>' +
-          '</div>' +
-          '<div class="gallery-overlay">' +
-            '<i class="fas fa-expand-alt gallery-zoom"></i>' +
-            '<span class="g-caption">' + escHtml(item.caption || '') + '</span>' +
-          '</div>' +
-        '</div>'
-      );
-    }).join('');
+    if (filtersWrap) filtersWrap.style.display = '';
 
-    /* Attach events */
-    grid.querySelectorAll('.gallery-item').forEach(function (el) {
-      el.addEventListener('click', function () {
-        openLightbox(parseInt(this.getAttribute('data-idx'), 10));
-      });
-      el.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
+    var loadedImages = [];
+    var pending = selectedImages.length;
+
+    function finalizeRender() {
+      if (token !== renderToken) return;
+      activeImages = loadedImages;
+
+      if (activeImages.length === 0) {
+        grid.innerHTML = '';
+        if (filtersWrap) filtersWrap.style.display = 'none';
+        return;
+      }
+
+      grid.innerHTML = activeImages.map(function (item, idx) {
+        return (
+          '<div class="gallery-item fade-up" data-idx="' + idx + '" role="button" ' +
+               'aria-label="View ' + escHtml(item.caption || 'photo') + '" tabindex="0">' +
+            '<img src="assets/gallery/' + escHtml(item.file) + '" ' +
+                 'alt="' + escHtml(item.caption || 'Gallery photo') + '" loading="lazy">' +
+            '<div class="gallery-overlay">' +
+              '<i class="fas fa-expand-alt gallery-zoom"></i>' +
+              '<span class="g-caption">' + escHtml(item.caption || '') + '</span>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+
+      /* Attach events */
+      grid.querySelectorAll('.gallery-item').forEach(function (el) {
+        el.addEventListener('click', function () {
           openLightbox(parseInt(this.getAttribute('data-idx'), 10));
-        }
-      });
-    });
-
-    /* Re-trigger fade-up observer on new elements */
-    if ('IntersectionObserver' in window) {
-      var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
         });
-      }, { threshold: 0.1 });
-      grid.querySelectorAll('.fade-up').forEach(function (el) { obs.observe(el); });
-    } else {
-      grid.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('visible'); });
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox(parseInt(this.getAttribute('data-idx'), 10));
+          }
+        });
+      });
+
+      /* Re-trigger fade-up observer on new elements */
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
+          });
+        }, { threshold: 0.1 });
+        grid.querySelectorAll('.fade-up').forEach(function (el) { obs.observe(el); });
+      } else {
+        grid.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('visible'); });
+      }
     }
+
+    selectedImages.forEach(function (item) {
+      var probe = new Image();
+      probe.onload = function () {
+        if (token !== renderToken) return;
+        loadedImages.push(item);
+        pending -= 1;
+        if (pending === 0) finalizeRender();
+      };
+      probe.onerror = function () {
+        if (token !== renderToken) return;
+        pending -= 1;
+        if (pending === 0) finalizeRender();
+      };
+      probe.src = 'assets/gallery/' + item.file;
+    });
   }
 
   /* ---------------------------------------------------------
@@ -77,7 +108,7 @@
   --------------------------------------------------------- */
   function openLightbox(index) {
     var overlay = document.getElementById('lightboxOverlay');
-    if (!overlay) return;
+    if (!overlay || activeImages.length === 0) return;
     currentIndex = (index + activeImages.length) % activeImages.length;
     updateLightboxImage();
     overlay.classList.add('active');
